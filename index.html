@@ -36,8 +36,9 @@
     <div class="container">
 
       <div class="mb-3">
+          <!-- @keyup="searchForMovie"  -->
         <input
-          @keyup="searchForMovie" 
+          @keyup.enter="searchForMovie" 
           v-model="movieQuery" 
           type="text" class="form-control form-control-lg bg-dark text-white col text-center" placeholder="search movie">
       </div>
@@ -89,10 +90,10 @@
             </div>
 
             <div class="list-group-item d-flex justify-content-between align-items-center"
-              v-for="movie in nominatedMovies" 
+              v-for="(movie, index) in nominatedMovies" 
               :key="movie.id" >
               <span class="mr-2">{{ movie.title }} ({{ movie.releaseDate }})</span>
-              <button class="btn btn-danger btn-sm" title="remove from lists">x</button>
+              <button class="btn btn-danger btn-sm" title="remove from lists" @click="removeNominatedMovie(index)">x</button>
             </div>
           </section>
 
@@ -187,7 +188,6 @@
       },
 
       nominateMovie(mv) {
-        // console.log(mv);
         // Poster | Title | Type | Year | imdbID: (...)
         this.nominatedMovies.push({
           id : mv.imdbID,
@@ -199,8 +199,10 @@
         console.log(this.nominatedMovies)
         console.log(this.nominatedMoviesId)
       },
+      
       removeNominatedMovie(index) {
-        this.nominatedMovies.splice(index, 1)
+        this.nominatedMovies.splice(index, 1);
+        this.nominatedMoviesId.splice(index, 1);
       }
     },
 
