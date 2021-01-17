@@ -39,13 +39,13 @@
         <input
           @keyup="searchForMovie" 
           v-model="movieQuery" 
-          type="text" class="form-control form-control-sm col text-center" placeholder="search movie">
+          type="text" class="form-control form-control-lg bg-dark text-white col text-center" placeholder="search movie">
       </div>
 
       <div class="mb-3 row">
         <div class="col-md-8">
 
-          <section class="list-group">
+          <section class="list-group pt-2">
 
             <div class="list-group-item text-center">
               <p>Movies results for <em class="lead">{{ movieQuery }}</em>: <em class="font-weight-bold">{{ movieResultsCount }}</em></p>
@@ -61,7 +61,7 @@
                   <h5 class="mt-0">{{ movie.Title }}</h5>
                   <p>{{ movie.Year }}</p>
 
-                  <button class="btn btn-primary btn-sm" @click="nominateMovie(movie)" :disabled="nominatedMoviesId.includes(movie.imdbID)">Nominate</button>
+                  <button class="btn btn-primary btn-sm" @click="nominateMovie(movie)" :disabled="deactivateNominationButton(movie)">Nominate</button>
                 </div>
               </div>
             </div>
@@ -76,9 +76,13 @@
 
         <div class="col-md-4">
 
-          <section class="list-group">
+          <section class="list-group sticky-top pt-2">
             <div class="list-group-item text-center font-weight-bold">
-              <p>Your Nominated Movies: {{ nominatedMovies.length }}</p>
+              <p>Your Nomination Lists: {{ nominatedMovies.length }}</p>
+      
+              <div class="alert alert-warning m-2 text-center pt-2 sticky-top" role="alert" v-if="nominatedMovies.length > 4">
+                Maximum of 5 nominations allowed! Thank you.
+              </div>
             </div>
 
             <div class="list-group-item d-flex justify-content-between align-items-center">
@@ -156,6 +160,10 @@
     },
 
     methods: {
+      deactivateNominationButton(mv) {
+        return this.nominatedMoviesId.includes(mv.imdbID) || this.nominatedMovies.length == 5;
+      },
+
       searchForMovie() {
         Event.$emit('search_movie');
       },
