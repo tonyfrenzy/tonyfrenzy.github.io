@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>The Shoppies</title>
+  </head>
+  <body>
+  <div id="app">
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">The Shoppies</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="#">Movies</a>
+        <a class="p-2 text-dark" href="#">Series</a>
+        <a class="p-2 text-dark" href="#">Reviews</a>
+      </nav>
+      <a class="btn btn-outline-primary" href="#">Sign up</a>
+    </div>
+
+    <div class="container px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">
+        <strong>The Shoppies:</strong>
+        <br>Movie awards for entrepreneurs
+      </h1>
+      <p class="lead">
+        Shopify has branched out into movie award shows and we need your help. Kindly send in your movie nominations.
+      </p>
+    </div>
+
+    <div class="container">
+
+      <div class="mb-3">
+        <input
+          @keyup="searchForMovie" 
+          v-model="movieQuery" 
+          type="text" class="form-control form-control-sm col text-center" placeholder="search movie">
+      </div>
+
+      <div class="mb-3 row">
+        <div class="col-md-8">
+
+          <section class="list-group">
+
+            <div class="list-group-item text-center">
+              <p>Movies results for <em class="lead">{{ movieQuery }}</em>: <em class="font-weight-bold">{{ movieResultsCount }}</em></p>
+            </div>
+
+            <div class="list-group-item d-flex justify-content-between align-items-center"
+              v-for="movie in movies.Search" 
+              :key="movie.imdbID" >
+
+              <div class="media mr-2">
+                <img class="align-self-start mr-3" :src="movie.Poster" alt="movie poster" style="display:block;overflow:hidden;width:150px;height:150px;">
+                <div class="media-body">
+                  <h5 class="mt-0">{{ movie.Title }}</h5>
+                  <p>{{ movie.Year }}</p>
+
+                  <button class="btn btn-primary btn-sm" @click="nominateMovie(movie)" :disabled="nominatedMoviesId.includes(movie.imdbID)">Nominate</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="list-group-item d-flex justify-content-between align-items-center">
+              Dapibus ac facilisis in
+              <button class="btn btn-primary btn-sm">Nominate</button>
+            </div> -->
+          </section>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <section class="list-group">
+            <div class="list-group-item text-center font-weight-bold">
+              <p>Your Nominated Movies: {{ nominatedMovies.length }}</p>
+            </div>
+
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              Cras justo odio
+              <button class="btn btn-danger btn-sm">Remove</button>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              Dapibus ac facilisis in
+              <button class="btn btn-danger btn-sm">Remove</button>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              Morbi leo risus
+              <button class="btn btn-danger btn-sm">Remove</button>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pt-4 my-md-5 pt-md-5 border-top">        
+        - <small>UX Developer Intern & Web Developer Intern Challenge - Summer 2021</small>
+      </div>
+
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-12 col-md">
+            The Shoppies
+            <small class="d-block mb-3 text-muted">© 2021</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Movie Industries</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Hollywood</a></li>
+              <li><a class="text-muted" href="#">Bollywood</a></li>
+              <li><a class="text-muted" href="#">Nollywood</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Team</a></li>
+              <li><a class="text-muted" href="#">Privacy</a></li>
+              <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- // <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+
+<script>
+  window.Event = new Vue();
+  var app = new Vue({
+  el: '#app',
+    data() {
+      return {
+        movieQuery: '',
+        movies: {},
+        nominatedMoviesId: [],
+        nominatedMovies: [],
+        movieResultsCount : 0,
+        movieQueryUrl: 'http://www.omdbapi.com/?apikey=eaaab08a',
+      }
+    },
+
+    methods: {
+      searchForMovie() {
+        Event.$emit('search_movie');
+      },
+
+      /** NEW MOVIE SEARCH */
+      searchMovie() {
+        axios.get(this.movieQueryUrl, {
+          params: {
+            s : this.movieQuery,
+          }
+        })
+        .then((results) => (this.movies = results.data))
+        .then(() => { 
+          this.movieResultsCount = this.movies.totalResults ?? 0;
+          // console.log(this.movies.Search);
+          // console.log(this.movies.Response);
+          // console.log(this.movies.totalResults);
+        })
+        .catch(()=>{ /*...*/ })
+      },
+
+      toggleMovieSection() {
+        return this.SectionOn = ! this.SectionOn;
+      },
+
+      nominateMovie(mv) {
+        // console.log(mv);
+        // Poster | Title | Type | Year | imdbID: (...)
+        this.nominatedMovies.push({
+          id : mv.imdbID,
+          poster : mv.Poster,
+          title : mv.Title,
+          releaseDate : mv.Year,
+        })
+        this.nominatedMoviesId.push( mv.imdbID )
+        console.log(this.nominatedMovies)
+        console.log(this.nominatedMoviesId)
+      },
+      removeNominatedMovie(index) {
+        this.nominatedMovies.splice(index, 1)
+      }
+    },
+
+    /** LOAD ON NEW SEARCH */
+    created() {
+      Event.$on('search_movie', () => {
+        this.searchMovie();
+      });
+    },
+
+    computed: {
+    }
+  });
+</script>
+
+  </body>
+</html>

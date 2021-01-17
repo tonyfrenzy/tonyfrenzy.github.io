@@ -1,0 +1,10 @@
+Improvements:
+1. Pagination of movie search results
+
+2. Mobile Responsiveness
+
+3. 
+
+4. 
+
+5. 
