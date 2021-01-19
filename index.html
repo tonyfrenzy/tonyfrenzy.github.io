@@ -36,8 +36,9 @@
     <div class="container">
 
       <div class="mb-3">
+          <!-- @keyup.enter="searchMovie"  -->
         <input
-          @keyup.enter="searchMovie" 
+          @keyup="searchMovie" 
           v-model="movieQuery" 
           type="text" class="form-control form-control-lg bg-dark text-white col text-center" placeholder="search movie">
       </div>
@@ -187,8 +188,8 @@
           releaseDate : mv.Year,
         })
         this.nominatedMoviesId.push( mv.imdbID )
-        console.log(this.nominatedMovies)
-        console.log(this.nominatedMoviesId)
+        // console.log(this.nominatedMovies)
+        // console.log(this.nominatedMoviesId)
       },
 
       removeNominatedMovie(index) {

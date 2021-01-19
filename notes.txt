@@ -1,10 +1,14 @@
+This is a simple single page app and thus everything is handled with vuejs and within a single page.
+
 Improvements:
-1. Pagination of movie search results
+1. Pagination of movie search results for > 10 saerches
 
 2. Mobile Responsiveness
 
-3. 
+3. Vuex can be used to manage state more efficiently.
 
 4. Notification is sent after 5 nominations.
 
 5. Every movie nomination is disabled after 5 nominations.
+
+6. LocalStorage used to persist nominated movies data.
