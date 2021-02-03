@@ -22,3 +22,10 @@ Upcoming Improvements:
 2. Vuex can be used to manage state more efficiently.
 
 3. LocalStorage used to persist nominated movies data.
+
+
+Deployment Resources:
+----------------------
+https://dev.to/rolanddoda/deploy-to-github-pages-like-a-pro-with-github-actions-4hdg
+
+https://medium.com/@Roli_Dori/deploy-vue-cli-3-project-to-github-pages-ebeda0705fbd
