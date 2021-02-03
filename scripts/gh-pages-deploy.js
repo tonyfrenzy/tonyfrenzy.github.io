@@ -20,4 +20,4 @@ const fs = require("fs");
     console.log(e.message);
     process.exit(1);
   }
-})
+})();
